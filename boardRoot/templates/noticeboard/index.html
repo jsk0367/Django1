@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 목록</title>
+    <style>
+        .cls1 {
+            text-decoration: none;
+        }
+        .cls2 {
+            text-align: center;
+            font-size: 30px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <table align="center" border="1" width="80%">
+        <thead>
+            <tr height = "10" align="center" bgcolor="lightgreen">
+                <th>글번호</th>
+                <th>작성자</th>
+                <th>제목</th>
+                <th>작성일</th>
+            </tr>
+        </thead>
+        {% if article_list %}
+        <tbody>
+            {% for article in article_list %}
+            <tr align="center">
+                <td width="5%">{{forloop.counter}}</td>
+                <td width="10%">{{article.writeID}}</td>
+                <td align="left" width="35%">
+                    <span style="padding-right:30px"></span>
+                    <a class="cls1" href="{% url 'noticeboard:view' article.id %}">{{article.title}}</a>
+                </td>
+                <td width="10%">{{article.writeDate}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+        <tbody>
+            <tr height="10">
+                <td colspan="4">
+                    <p align="center">
+                        <b><span style="front-size:15pt;">등록된 글이 없습니다</span></b>
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+        {% endif %}
+    </table>
+    <a class="cls1" href="{% url 'noticeboard:write_article' %}">
+        <span class="cls2">글쓰기</span>
+    </a>
+</body>
+</html>

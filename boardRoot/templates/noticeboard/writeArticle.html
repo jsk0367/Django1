@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>새글 쓰기</title>
+        <script>
+            function backToList(obj) {
+                obj.action="{% url 'noticeboard:index' %}";
+                obj.submit();
+            }
+        </script>
+    </head>
+    <body>
+        <h1 style="text-align:center">새글 쓰기</h1>
+        <form name="articleForm" method="post" action="{% url 'noticeboard:add_article' %}">
+        {% csrf_token %}
+            <table border="0" align="center">
+                <tbody>
+                    <tr>
+                        <td align="right">글제목 :</td>
+                        <td colspan="2"><input type="text" size="72" maxlength="100" name="title"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right" valign="top"><br>글내용: </td>
+                        <td colspan="2"><textarea name="content" rows="10" cols="65" maxlength="2000"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"></td>
+                        <td colspan="2"><input type="submit" value="글쓰기"/>
+                        <input type="button" value="목록보기" onclick="backToList(this.form)"/>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>
